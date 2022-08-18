@@ -194,6 +194,44 @@ console.log(superuser.createdAt);
 console.log(SuperUser.staticVar);
 // console.log(superuser.id);
 
+class Rect {
+  width: number;
+  height: number;
+  private perimiter: number;
+  private area: number;
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+    this.perimiter = 2 * (this.width + this.height);
+    this.area = this.width * this.height;
+  }
+  getPerimiter(): number {
+    return this.perimiter;
+  }
+  getArea(): number {
+    return this.area;
+  }
+}
+//TK1 add to this class area
+
+class Circle {
+  static PI = 3.14;
+  radius: number;
+  private perimiter: number;
+  private area: number;
+  constructor(radius: number) {
+    this.radius = radius;
+    this.perimiter = 2 * Circle.PI * this.radius;
+    this.area = Circle.PI * this.radius ** 2;
+  }
+  getPerimiter(): number {
+    return this.perimiter;
+  }
+  getArea(): number {
+    return this.area;
+  }
+}
+
 /* ================ enum ================ */
 // "Success" != "success" != "succesS"
 
