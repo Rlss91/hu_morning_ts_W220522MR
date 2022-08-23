@@ -1,5 +1,6 @@
 import { realEstateArr, donotTouchRealEstateArr } from "../dataInitialization";
 import { RealEstate } from "../models/RealEstate.model";
+export { initializeList, handleModalPopupClick, selectedIdToEditRealestate };
 
 const initializeList = (): void => {
   let listContainer = document.getElementById("listContainer");
@@ -61,5 +62,3 @@ const handleModalPopupClick = (selectedId: number): void => {
     }
   }
 };
-
-export { initializeList, handleModalPopupClick, selectedIdToEditRealestate };

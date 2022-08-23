@@ -1,4 +1,5 @@
 import { realEstateArr } from "../dataInitialization";
+export { initializeCardsGrid };
 
 const initializeCardsGrid = (): void => {
   let cardsGridContainer = document.getElementById("cardsGridContainer");
@@ -21,5 +22,3 @@ const initializeCardsGrid = (): void => {
   }
 };
 initializeCardsGrid();
-
-export { initializeCardsGrid };
