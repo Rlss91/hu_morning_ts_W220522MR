@@ -1,5 +1,5 @@
-import { realEstateArr } from "../dataInitialization";
-
+import { realEstateArr } from "../dataInitialization.js";
+export { nextCarselaImage, previousCarselaImage };
 let caruselaActivePhoto: number;
 
 const initializeCaruselaImages = (): void => {

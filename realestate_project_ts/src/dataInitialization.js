@@ -1,4 +1,4 @@
-export { realEstateArr, donotTouchRealEstateArr, initRealestateArrays };
+export { realEstateArr, donotTouchRealEstateArr, initRealestateArrays, changeRealEstateArr, };
 let realEstateArr;
 let donotTouchRealEstateArr;
 const initRealestateArrays = () => {
@@ -13,3 +13,6 @@ const initRealestateArrays = () => {
 };
 initRealestateArrays();
 console.log("here");
+const changeRealEstateArr = (newRealEstateArr) => {
+    realEstateArr = newRealEstateArr;
+};

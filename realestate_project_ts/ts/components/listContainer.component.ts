@@ -1,5 +1,8 @@
-import { realEstateArr, donotTouchRealEstateArr } from "../dataInitialization";
-import { RealEstate } from "../models/RealEstate.model";
+import {
+  realEstateArr,
+  donotTouchRealEstateArr,
+} from "../dataInitialization.js";
+import { RealEstate } from "../models/RealEstate.model.js";
 export { initializeList, handleModalPopupClick, selectedIdToEditRealestate };
 
 const initializeList = (): void => {

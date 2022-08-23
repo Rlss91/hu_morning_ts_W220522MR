@@ -102,7 +102,7 @@
                 placeholder="RealEstate name"
                 aria-label="RealEstate name"
                 aria-describedby="basic-addon1"
-                oninput="handleFilterByNameInput(event)"
+                id="realEstatFilterTextBoxInput"
               />
             </div>
           </div>
@@ -111,10 +111,10 @@
           <!-- carusela -->
           <div class="carusela" id="caruselaDiv"></div>
           <div class="carusela-btns">
-            <button class="btn btn-info" onclick="previousCarselaImage()">
+            <button class="btn btn-info" id="caruselaPrevBtn">
               <i class="bi bi-caret-left-fill"></i>
             </button>
-            <button class="btn btn-info" onclick="nextCarselaImage()">
+            <button class="btn btn-info" id="caruselaNextBtn">
               <i class="bi bi-caret-right-fill"></i>
             </button>
           </div>

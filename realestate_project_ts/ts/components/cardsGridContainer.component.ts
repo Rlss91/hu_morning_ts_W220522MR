@@ -1,4 +1,4 @@
-import { realEstateArr } from "../dataInitialization";
+import { realEstateArr } from "../dataInitialization.js";
 export { initializeCardsGrid };
 
 const initializeCardsGrid = (): void => {

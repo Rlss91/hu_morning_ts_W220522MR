@@ -1,13 +1,13 @@
 import { realEstateArr } from "../dataInitialization.js";
 export { initializeCardsGrid };
 const initializeCardsGrid = () => {
-  let cardsGridContainer = document.getElementById("cardsGridContainer");
-  if (cardsGridContainer === null) {
-    return;
-  }
-  cardsGridContainer.innerHTML = "";
-  for (let realEstateItem of realEstateArr) {
-    cardsGridContainer.innerHTML += `
+    let cardsGridContainer = document.getElementById("cardsGridContainer");
+    if (cardsGridContainer === null) {
+        return;
+    }
+    cardsGridContainer.innerHTML = "";
+    for (let realEstateItem of realEstateArr) {
+        cardsGridContainer.innerHTML += `
         <div class="col">
             <div class="card">
             <img src="${realEstateItem.imgUrl}" class="card-img-top" alt="${realEstateItem.title}">
@@ -18,6 +18,6 @@ const initializeCardsGrid = () => {
             </div>
         </div>
         `;
-  }
+    }
 };
 initializeCardsGrid();

@@ -2,12 +2,17 @@ import {
   realEstateArr,
   donotTouchRealEstateArr,
   initRealestateArrays,
-} from "./dataInitialization";
+  changeRealEstateArr,
+} from "./dataInitialization.js";
 import {
   selectedIdToEditRealestate,
   initializeList,
-} from "./components/listContainer.component";
-import { initializeCardsGrid } from "./components/cardsGridContainer.component";
+} from "./components/listContainer.component.js";
+import { initializeCardsGrid } from "./components/cardsGridContainer.component.js";
+import {
+  nextCarselaImage,
+  previousCarselaImage,
+} from "./components/carusela.component.js";
 
 enum EModeDisplay {
   CARUSELA,
@@ -24,6 +29,11 @@ window.addEventListener("load", () => {
   );
   let selectDisplayModeListBtn = document.getElementById(
     "selectDisplayModeListBtn"
+  );
+  let caruselaNextBtn = document.getElementById("caruselaNextBtn");
+  let caruselaPrevBtn = document.getElementById("caruselaPrevBtn");
+  let realEstatFilterTextBoxInput = document.getElementById(
+    "realEstatFilterTextBoxInput"
   );
   if (selectDisplayModeCaruselaBtn !== null) {
     selectDisplayModeCaruselaBtn.addEventListener("click", () => {
@@ -44,6 +54,30 @@ window.addEventListener("load", () => {
     selectDisplayModeListBtn.addEventListener("click", () => {
       handleSelectModeClick(EModeDisplay.LIST);
     });
+  }
+  if (caruselaNextBtn !== null) {
+    caruselaNextBtn.addEventListener("click", () => {
+      nextCarselaImage();
+    });
+  }
+  if (caruselaPrevBtn !== null) {
+    caruselaPrevBtn.addEventListener("click", () => {
+      previousCarselaImage();
+    });
+  }
+  if (realEstatFilterTextBoxInput !== null) {
+    realEstatFilterTextBoxInput.addEventListener(
+      "input",
+      (event: Event): void => {
+        handleFilterByNameInput(event as InputEvent);
+        /*
+          addEventListener will always give us general event.
+          but we know that this event is typeof InputEvent.
+          this is why we will create anonymous function that will accept general event
+          and them we will convert it to InputEvent. 
+        */
+      }
+    );
   }
 });
 
@@ -112,15 +146,20 @@ const handleFilterByNameInput = (event: InputEvent): void => {
   // realEstateArr = donotTouchRealEstateArr.filter((item) =>
   //   item.title.includes(value)
   // );
-  Object.assign(
-    realEstateArr,
-    donotTouchRealEstateArr.filter((item) => item.title.includes(value))
-  );
+  // Object.assign(
+  //   realEstateArr,
+  //   donotTouchRealEstateArr.filter((item) => item.title.includes(value))
+  // );
   /*
     we not allowed to change variables that we imported,
     so we will use Object.assign to copy new array to filter,
     this way we trik ts compiler
   */
+
+  changeRealEstateArr(
+    donotTouchRealEstateArr.filter((item) => item.title.includes(value))
+  );
+
   //   realEstateArr = donotTouchRealEstateArr.filter((item) => {
   //     return item.title.includes(value);
   //   });
