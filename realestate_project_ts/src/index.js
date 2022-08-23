@@ -8,6 +8,11 @@ var EModeDisplay;
     EModeDisplay[EModeDisplay["GRID"] = 1] = "GRID";
     EModeDisplay[EModeDisplay["LIST"] = 2] = "LIST";
 })(EModeDisplay || (EModeDisplay = {}));
+var ESortDisplay;
+(function (ESortDisplay) {
+    ESortDisplay[ESortDisplay["ASC"] = 0] = "ASC";
+    ESortDisplay[ESortDisplay["DESC"] = 1] = "DESC";
+})(ESortDisplay || (ESortDisplay = {}));
 window.addEventListener("load", () => {
     let selectDisplayModeCaruselaBtn = document.getElementById("selectDisplayModeCaruselaBtn");
     let selectDisplayModeGridBtn = document.getElementById("selectDisplayModeGridBtn");
@@ -15,6 +20,8 @@ window.addEventListener("load", () => {
     let caruselaNextBtn = document.getElementById("caruselaNextBtn");
     let caruselaPrevBtn = document.getElementById("caruselaPrevBtn");
     let realEstatFilterTextBoxInput = document.getElementById("realEstatFilterTextBoxInput");
+    let selectDisplaySortAscBtn = document.getElementById("selectDisplaySortAscBtn");
+    let selectDisplaySortDescBtn = document.getElementById("selectDisplaySortDescBtn");
     if (selectDisplayModeCaruselaBtn !== null) {
         selectDisplayModeCaruselaBtn.addEventListener("click", () => {
             handleSelectModeClick(EModeDisplay.CARUSELA);
@@ -43,6 +50,16 @@ window.addEventListener("load", () => {
     if (realEstatFilterTextBoxInput !== null) {
         realEstatFilterTextBoxInput.addEventListener("input", (event) => {
             handleFilterByNameInput(event);
+        });
+    }
+    if (selectDisplaySortDescBtn !== null) {
+        selectDisplaySortDescBtn.addEventListener("click", () => {
+            handleSortClick(ESortDisplay.DESC);
+        });
+    }
+    if (selectDisplaySortAscBtn !== null) {
+        selectDisplaySortAscBtn.addEventListener("click", () => {
+            handleSortClick(ESortDisplay.ASC);
         });
     }
 });
@@ -74,13 +91,13 @@ const handleSelectModeClick = (selectModeNum) => {
     selectModeDisplayNowElement2.classList.remove("d-none");
 };
 const handleSortClick = (sortDir) => {
-    if (sortDir == "⬇️") {
+    if (sortDir == ESortDisplay.DESC) {
         realEstateArr.sort((a, b) => a.price - b.price);
-        localStorage.setItem("sortDir", "⬇️");
+        localStorage.setItem("sortDir", ESortDisplay.DESC + "");
     }
-    if (sortDir == "⬆️") {
+    if (sortDir == ESortDisplay.ASC) {
         realEstateArr.sort((a, b) => b.price - a.price);
-        localStorage.setItem("sortDir", "⬆️");
+        localStorage.setItem("sortDir", ESortDisplay.ASC + "");
     }
     initializeList();
     initializeCardsGrid();
@@ -97,11 +114,13 @@ const handleFilterByNameInput = (event) => {
 const initPageLoad = () => {
     let selectModeFromls = localStorage.getItem("selectMode");
     if (selectModeFromls) {
-        handleSelectModeClick(+selectModeFromls);
+        let selectModeFromlsEnum = selectModeFromls;
+        handleSelectModeClick(selectModeFromlsEnum);
     }
     let sortDirFromls = localStorage.getItem("sortDir");
     if (sortDirFromls) {
-        handleSortClick(sortDirFromls);
+        let sortDirFromlsEnum = sortDirFromls;
+        handleSortClick(sortDirFromlsEnum);
     }
 };
 initPageLoad();

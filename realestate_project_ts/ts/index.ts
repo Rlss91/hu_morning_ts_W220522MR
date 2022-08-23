@@ -20,6 +20,11 @@ enum EModeDisplay {
   LIST,
 }
 
+enum ESortDisplay {
+  ASC,
+  DESC,
+}
+
 window.addEventListener("load", () => {
   let selectDisplayModeCaruselaBtn = document.getElementById(
     "selectDisplayModeCaruselaBtn"
@@ -34,6 +39,12 @@ window.addEventListener("load", () => {
   let caruselaPrevBtn = document.getElementById("caruselaPrevBtn");
   let realEstatFilterTextBoxInput = document.getElementById(
     "realEstatFilterTextBoxInput"
+  );
+  let selectDisplaySortAscBtn = document.getElementById(
+    "selectDisplaySortAscBtn"
+  );
+  let selectDisplaySortDescBtn = document.getElementById(
+    "selectDisplaySortDescBtn"
   );
   if (selectDisplayModeCaruselaBtn !== null) {
     selectDisplayModeCaruselaBtn.addEventListener("click", () => {
@@ -79,6 +90,16 @@ window.addEventListener("load", () => {
       }
     );
   }
+  if (selectDisplaySortDescBtn !== null) {
+    selectDisplaySortDescBtn.addEventListener("click", () => {
+      handleSortClick(ESortDisplay.DESC);
+    });
+  }
+  if (selectDisplaySortAscBtn !== null) {
+    selectDisplaySortAscBtn.addEventListener("click", () => {
+      handleSortClick(ESortDisplay.ASC);
+    });
+  }
 });
 
 // console.log(realEstateArr);
@@ -116,14 +137,14 @@ const handleSelectModeClick = (selectModeNum: EModeDisplay): void => {
   selectModeDisplayNowElement2.classList.remove("d-none");
 };
 
-const handleSortClick = (sortDir: string): void => {
-  if (sortDir == "⬇️") {
+const handleSortClick = (sortDir: ESortDisplay): void => {
+  if (sortDir == ESortDisplay.DESC) {
     realEstateArr.sort((a, b) => a.price - b.price);
-    localStorage.setItem("sortDir", "⬇️");
+    localStorage.setItem("sortDir", ESortDisplay.DESC + "");
   }
-  if (sortDir == "⬆️") {
+  if (sortDir == ESortDisplay.ASC) {
     realEstateArr.sort((a, b) => b.price - a.price);
-    localStorage.setItem("sortDir", "⬆️");
+    localStorage.setItem("sortDir", ESortDisplay.ASC + "");
   }
   initializeList();
   initializeCardsGrid();
@@ -170,11 +191,19 @@ const handleFilterByNameInput = (event: InputEvent): void => {
 const initPageLoad = () => {
   let selectModeFromls = localStorage.getItem("selectMode");
   if (selectModeFromls) {
-    handleSelectModeClick(+selectModeFromls);
+    let selectModeFromlsEnum = selectModeFromls as unknown as EModeDisplay;
+    handleSelectModeClick(selectModeFromlsEnum);
   }
   let sortDirFromls = localStorage.getItem("sortDir");
   if (sortDirFromls) {
-    handleSortClick(sortDirFromls);
+    let sortDirFromlsEnum = sortDirFromls as unknown as ESortDisplay;
+    /*
+      we get the sort direction from localstorage as string.
+      we must convert the string to enum, the syntax to do this is:
+      first we convert it to unknow type then we convert it from
+      unknow type to our enum.
+    */
+    handleSortClick(sortDirFromlsEnum);
   }
 };
 
