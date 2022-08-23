@@ -1,6 +1,9 @@
-"use strict";
+import { realEstateArr, donotTouchRealEstateArr } from "../dataInitialization";
 const initializeList = () => {
     let listContainer = document.getElementById("listContainer");
+    if (listContainer === null) {
+        return;
+    }
     listContainer.innerHTML = "";
     for (let realEstateItem of realEstateArr) {
         listContainer.innerHTML += `
@@ -36,8 +39,18 @@ const handleModalPopupClick = (selectedId) => {
     selectedIdToEditRealestate = selectedId;
     let realestateItem = donotTouchRealEstateArr.find((item) => item.id === selectedIdToEditRealestate);
     if (realestateItem) {
-        document.getElementById("realestateInput").value = realestateItem.title;
-        document.getElementById("urlInput").value = realestateItem.imgUrl;
-        document.getElementById("priceInput").value = realestateItem.price;
+        let realestateInput = document.getElementById("realestateInput");
+        let urlInput = document.getElementById("urlInput");
+        let priceInput = document.getElementById("priceInput");
+        if (realestateInput !== null) {
+            realestateInput.value = realestateItem.title;
+        }
+        if (urlInput !== null) {
+            urlInput.value = realestateItem.imgUrl;
+        }
+        if (priceInput !== null) {
+            priceInput.value = realestateItem.price + "";
+        }
     }
 };
+export { initializeList, handleModalPopupClick, selectedIdToEditRealestate };

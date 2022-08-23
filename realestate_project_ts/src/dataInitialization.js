@@ -1,14 +1,15 @@
-"use strict";
 let realEstateArr;
 let donotTouchRealEstateArr;
 const initRealestateArrays = () => {
-    realEstateArr = localStorage.getItem("realEstateArr");
-    if (realEstateArr) {
-        realEstateArr = JSON.parse(realEstateArr);
+    let realEstateJsonString = localStorage.getItem("realEstateArr");
+    if (realEstateJsonString) {
+        realEstateArr = JSON.parse(realEstateJsonString);
     }
     else {
         realEstateArr = [];
     }
-    donotTouchRealEstateArr = _.cloneDeep(realEstateArr);
+    donotTouchRealEstateArr = JSON.parse(JSON.stringify(realEstateArr));
 };
 initRealestateArrays();
+console.log("here");
+export { realEstateArr, donotTouchRealEstateArr, initRealestateArrays };

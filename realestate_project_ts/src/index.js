@@ -1,23 +1,58 @@
-"use strict";
-console.log(realEstateArr);
+import { realEstateArr, donotTouchRealEstateArr, initRealestateArrays, } from "./dataInitialization";
+import { selectedIdToEditRealestate, initializeList, } from "./components/listContainer.component";
+import { initializeCardsGrid } from "./components/cardsGridContainer.component";
+var EModeDisplay;
+(function (EModeDisplay) {
+    EModeDisplay[EModeDisplay["CARUSELA"] = 0] = "CARUSELA";
+    EModeDisplay[EModeDisplay["GRID"] = 1] = "GRID";
+    EModeDisplay[EModeDisplay["LIST"] = 2] = "LIST";
+})(EModeDisplay || (EModeDisplay = {}));
+window.addEventListener("load", () => {
+    let selectDisplayModeCaruselaBtn = document.getElementById("selectDisplayModeCaruselaBtn");
+    let selectDisplayModeGridBtn = document.getElementById("selectDisplayModeGridBtn");
+    let selectDisplayModeListBtn = document.getElementById("selectDisplayModeListBtn");
+    if (selectDisplayModeCaruselaBtn !== null) {
+        selectDisplayModeCaruselaBtn.addEventListener("click", () => {
+            handleSelectModeClick(EModeDisplay.CARUSELA);
+        });
+    }
+    if (selectDisplayModeGridBtn !== null) {
+        selectDisplayModeGridBtn.addEventListener("click", () => {
+            handleSelectModeClick(EModeDisplay.GRID);
+        });
+    }
+    if (selectDisplayModeListBtn !== null) {
+        selectDisplayModeListBtn.addEventListener("click", () => {
+            handleSelectModeClick(EModeDisplay.LIST);
+        });
+    }
+});
 let selectModeDisplayNow = "caruselaContainer";
 const handleSelectModeClick = (selectModeNum) => {
-    document.getElementById(selectModeDisplayNow).classList.add("d-none");
+    let selectModeDisplayNowElement = document.getElementById(selectModeDisplayNow);
+    if (selectModeDisplayNowElement === null) {
+        return;
+    }
+    selectModeDisplayNowElement.classList.add("d-none");
     switch (selectModeNum) {
-        case 1:
+        case EModeDisplay.CARUSELA:
             selectModeDisplayNow = "caruselaContainer";
-            localStorage.setItem("selectMode", "1");
+            localStorage.setItem("selectMode", EModeDisplay.CARUSELA + "");
             break;
-        case 2:
+        case EModeDisplay.GRID:
             selectModeDisplayNow = "cardsGridContainer";
-            localStorage.setItem("selectMode", "2");
+            localStorage.setItem("selectMode", EModeDisplay.GRID + "");
             break;
-        case 3:
+        case EModeDisplay.LIST:
             selectModeDisplayNow = "listContainer";
-            localStorage.setItem("selectMode", "3");
+            localStorage.setItem("selectMode", EModeDisplay.LIST + "");
             break;
     }
-    document.getElementById(selectModeDisplayNow).classList.remove("d-none");
+    let selectModeDisplayNowElement2 = document.getElementById(selectModeDisplayNow);
+    if (selectModeDisplayNowElement2 === null) {
+        return;
+    }
+    selectModeDisplayNowElement2.classList.remove("d-none");
 };
 const handleSortClick = (sortDir) => {
     if (sortDir == "⬇️") {
@@ -32,8 +67,11 @@ const handleSortClick = (sortDir) => {
     initializeCardsGrid();
 };
 const handleFilterByNameInput = (event) => {
+    if (event === null || event.target === null) {
+        return;
+    }
     let value = event.target.value;
-    realEstateArr = donotTouchRealEstateArr.filter((item) => item.title.includes(value));
+    Object.assign(realEstateArr, donotTouchRealEstateArr.filter((item) => item.title.includes(value)));
     initializeList();
     initializeCardsGrid();
 };
@@ -49,14 +87,17 @@ const initPageLoad = () => {
 };
 initPageLoad();
 const handleSaveEditClick = () => {
-    let realestateInput = document.getElementById("realestateInput").value;
-    let urlInput = document.getElementById("urlInput").value;
-    let priceInput = document.getElementById("priceInput").value;
+    let realestateInput = document.getElementById("realestateInput");
+    let urlInput = document.getElementById("urlInput");
+    let priceInput = document.getElementById("priceInput");
+    if (realestateInput === null || urlInput === null || priceInput === null) {
+        return;
+    }
     let realestateItem = donotTouchRealEstateArr.find((item) => item.id === selectedIdToEditRealestate);
     if (realestateItem) {
-        realestateItem.title = realestateInput;
-        realestateItem.price = +priceInput;
-        realestateItem.imgUrl = urlInput;
+        realestateItem.title = realestateInput.value;
+        realestateItem.price = +priceInput.value;
+        realestateItem.imgUrl = urlInput.value;
         console.log("donotTouchRealEstateArr", donotTouchRealEstateArr);
         localStorage.setItem("realEstateArr", JSON.stringify(donotTouchRealEstateArr));
         initRealestateArrays();

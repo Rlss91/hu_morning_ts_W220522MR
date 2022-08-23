@@ -1,6 +1,9 @@
-"use strict";
+import { realEstateArr } from "../dataInitialization";
 const initializeCardsGrid = () => {
     let cardsGridContainer = document.getElementById("cardsGridContainer");
+    if (cardsGridContainer === null) {
+        return;
+    }
     cardsGridContainer.innerHTML = "";
     for (let realEstateItem of realEstateArr) {
         cardsGridContainer.innerHTML += `
@@ -17,3 +20,4 @@ const initializeCardsGrid = () => {
     }
 };
 initializeCardsGrid();
+export { initializeCardsGrid };

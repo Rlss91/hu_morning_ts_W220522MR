@@ -62,4 +62,4 @@ const handleModalPopupClick = (selectedId: number): void => {
   }
 };
 
-export { initializeList, handleModalPopupClick };
+export { initializeList, handleModalPopupClick, selectedIdToEditRealestate };

@@ -75,13 +75,13 @@
         <div class="row">
           <!-- select display mode -->
           <div class="col-3">
-            <button class="btn btn-primary" onclick="handleSelectModeClick(1)">
+            <button class="btn btn-primary" id="selectDisplayModeCaruselaBtn">
               <i class="bi bi-image-fill"></i>
             </button>
-            <button class="btn btn-primary" onclick="handleSelectModeClick(2)">
+            <button class="btn btn-primary" id="selectDisplayModeGridBtn">
               <i class="bi bi-grid-3x3-gap-fill"></i>
             </button>
-            <button class="btn btn-primary" onclick="handleSelectModeClick(3)">
+            <button class="btn btn-primary" id="selectDisplayModeListBtn">
               <i class="bi bi-list"></i>
             </button>
             <button class="btn btn-primary" onclick="handleSortClick('⬇️')">
@@ -202,12 +202,12 @@
       </main>
       <footer>2022©️</footer>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
-    <!-- <script src="./js/models/RealEstate.model.js"></script>
-    <script src="./js/dataInitialization.js"></script>
-    <script src="./js/components/carusela.component.js"></script>
-    <script src="./js/components/cardsGridContainer.component.js"></script>
-    <script src="./js/components/listContainer.component.js"></script>
-    <script src="./js/index.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script> -->
+    <script src="../src/models/RealEstate.model.js"></script>
+    <script src="../src/dataInitialization.js"></script>
+    <script src="../src/components/carusela.component.js"></script>
+    <script src="../src/components/cardsGridContainer.component.js"></script>
+    <script src="../src/components/listContainer.component.js"></script>
+    <script src="../src/index.js"></script>
   </body>
 </html>

@@ -1,5 +1,12 @@
-import { realEstateArr, donotTouchRealEstateArr } from "./dataInitialization";
-import { initializeList } from "./components/listContainer.component";
+import {
+  realEstateArr,
+  donotTouchRealEstateArr,
+  initRealestateArrays,
+} from "./dataInitialization";
+import {
+  selectedIdToEditRealestate,
+  initializeList,
+} from "./components/listContainer.component";
 import { initializeCardsGrid } from "./components/cardsGridContainer.component";
 
 enum EModeDisplay {
@@ -8,7 +15,40 @@ enum EModeDisplay {
   LIST,
 }
 
-console.log(realEstateArr);
+window.addEventListener("load", () => {
+  let selectDisplayModeCaruselaBtn = document.getElementById(
+    "selectDisplayModeCaruselaBtn"
+  );
+  let selectDisplayModeGridBtn = document.getElementById(
+    "selectDisplayModeGridBtn"
+  );
+  let selectDisplayModeListBtn = document.getElementById(
+    "selectDisplayModeListBtn"
+  );
+  if (selectDisplayModeCaruselaBtn !== null) {
+    selectDisplayModeCaruselaBtn.addEventListener("click", () => {
+      handleSelectModeClick(EModeDisplay.CARUSELA);
+      /*
+        we must create anonymous function here to be able to call handleSelectModeClick with argument.
+        if we call handleSelectModeClick with argument here it will execute the function here 1 time
+        and will not execute the handleSelectModeClick when the click event will happend.
+      */
+    });
+  }
+  if (selectDisplayModeGridBtn !== null) {
+    selectDisplayModeGridBtn.addEventListener("click", () => {
+      handleSelectModeClick(EModeDisplay.GRID);
+    });
+  }
+  if (selectDisplayModeListBtn !== null) {
+    selectDisplayModeListBtn.addEventListener("click", () => {
+      handleSelectModeClick(EModeDisplay.LIST);
+    });
+  }
+});
+
+// console.log(realEstateArr);
+// console.log("here");
 let selectModeDisplayNow = "caruselaContainer";
 const handleSelectModeClick = (selectModeNum: EModeDisplay): void => {
   let selectModeDisplayNowElement =
@@ -21,17 +61,17 @@ const handleSelectModeClick = (selectModeNum: EModeDisplay): void => {
     case EModeDisplay.CARUSELA:
       //   document.getElementById("caruselaContainer").classList.remove("d-none");
       selectModeDisplayNow = "caruselaContainer";
-      localStorage.setItem("selectMode", "1");
+      localStorage.setItem("selectMode", EModeDisplay.CARUSELA + ""); //convert number to string using number+""
       break;
     case EModeDisplay.GRID:
       //   document.getElementById("cardsGridContainer").classList.remove("d-none");
       selectModeDisplayNow = "cardsGridContainer";
-      localStorage.setItem("selectMode", "2");
+      localStorage.setItem("selectMode", EModeDisplay.GRID + ""); //convert number to string using number+""
       break;
     case EModeDisplay.LIST:
       //   document.getElementById("listContainer").classList.remove("d-none");
       selectModeDisplayNow = "listContainer";
-      localStorage.setItem("selectMode", "3");
+      localStorage.setItem("selectMode", EModeDisplay.LIST + ""); //convert number to string using number+""
       break;
   }
   let selectModeDisplayNowElement2 =
@@ -42,7 +82,7 @@ const handleSelectModeClick = (selectModeNum: EModeDisplay): void => {
   selectModeDisplayNowElement2.classList.remove("d-none");
 };
 
-const handleSortClick = (sortDir): void => {
+const handleSortClick = (sortDir: string): void => {
   if (sortDir == "⬇️") {
     realEstateArr.sort((a, b) => a.price - b.price);
     localStorage.setItem("sortDir", "⬇️");
@@ -101,17 +141,22 @@ const initPageLoad = () => {
 
 initPageLoad();
 
-const handleSaveEditClick = () => {
-  let realestateInput = document.getElementById("realestateInput").value;
-  let urlInput = document.getElementById("urlInput").value;
-  let priceInput = document.getElementById("priceInput").value;
+const handleSaveEditClick = (): void => {
+  let realestateInput = document.getElementById(
+    "realestateInput"
+  ) as HTMLInputElement;
+  let urlInput = document.getElementById("urlInput") as HTMLInputElement;
+  let priceInput = document.getElementById("priceInput") as HTMLInputElement;
+  if (realestateInput === null || urlInput === null || priceInput === null) {
+    return;
+  }
   let realestateItem = donotTouchRealEstateArr.find(
     (item) => item.id === selectedIdToEditRealestate
   );
   if (realestateItem) {
-    realestateItem.title = realestateInput;
-    realestateItem.price = +priceInput;
-    realestateItem.imgUrl = urlInput;
+    realestateItem.title = realestateInput.value;
+    realestateItem.price = +priceInput.value;
+    realestateItem.imgUrl = urlInput.value;
     console.log("donotTouchRealEstateArr", donotTouchRealEstateArr);
     localStorage.setItem(
       "realEstateArr",
