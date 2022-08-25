@@ -1,13 +1,16 @@
-"use strict";
+import { donotTouchRealEstateArr } from "./dataInitialization.js";
 let newId = 1;
 if (donotTouchRealEstateArr.length > 0) {
     newId = donotTouchRealEstateArr[donotTouchRealEstateArr.length - 1].id + 1;
 }
 const handleCreateRealEstateSubmit = (event) => {
     event.preventDefault();
-    let realestateInput = document.querySelector("#realestateInput").value;
-    let urlInput = document.querySelector("#urlInput").value;
-    let priceInput = document.querySelector("#priceInput").value;
+    let realestateInput = document.querySelector("#realestateInput");
+    let urlInput = document.querySelector("#urlInput");
+    let priceInput = document.querySelector("#priceInput");
+    if (!realestateInput || !urlInput || !priceInput) {
+        return;
+    }
     donotTouchRealEstateArr = [
         ...donotTouchRealEstateArr,
         new RealEstate(realestateInput, +priceInput, urlInput, newId),

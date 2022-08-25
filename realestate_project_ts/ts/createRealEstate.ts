@@ -1,3 +1,5 @@
+import { donotTouchRealEstateArr } from "./dataInitialization.js";
+
 let newId = 1; // if donotTouchRealEstateArr is empty the first id will be 1
 if (donotTouchRealEstateArr.length > 0) {
   //if donotTouchRealEstateArr id not empty
@@ -5,11 +7,22 @@ if (donotTouchRealEstateArr.length > 0) {
   newId = donotTouchRealEstateArr[donotTouchRealEstateArr.length - 1].id + 1;
 }
 
-const handleCreateRealEstateSubmit = (event) => {
+const handleCreateRealEstateSubmit = (event: SubmitEvent) => {
   event.preventDefault();
-  let realestateInput = document.querySelector("#realestateInput").value;
-  let urlInput = document.querySelector("#urlInput").value;
-  let priceInput = document.querySelector("#priceInput").value;
+  // let realestateInput = document.querySelector("#realestateInput").value;
+  // let urlInput = document.querySelector("#urlInput").value;
+  // let priceInput = document.querySelector("#priceInput").value;
+
+  let realestateInput = document.querySelector(
+    "#realestateInput"
+  ) as HTMLInputElement;
+  let urlInput = document.querySelector("#urlInput") as HTMLInputElement;
+  let priceInput = document.querySelector("#priceInput") as HTMLInputElement;
+
+  if (!realestateInput || !urlInput || !priceInput) {
+    return;
+  }
+
   donotTouchRealEstateArr = [
     ...donotTouchRealEstateArr,
     new RealEstate(realestateInput, +priceInput, urlInput, newId),
