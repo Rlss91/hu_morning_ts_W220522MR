@@ -1,4 +1,8 @@
-import { donotTouchRealEstateArr } from "./dataInitialization.js";
+import {
+  donotTouchRealEstateArr,
+  changeDonotTouchRealEstateArr,
+} from "./dataInitialization.js";
+import { RealEstate } from "./models/RealEstate.model.js";
 
 let newId = 1; // if donotTouchRealEstateArr is empty the first id will be 1
 if (donotTouchRealEstateArr.length > 0) {
@@ -23,10 +27,19 @@ const handleCreateRealEstateSubmit = (event: SubmitEvent) => {
     return;
   }
 
-  donotTouchRealEstateArr = [
+  // donotTouchRealEstateArr = [
+  //   ...donotTouchRealEstateArr,
+  //   new RealEstate(realestateInput, +priceInput, urlInput, newId),
+  // ];
+  changeDonotTouchRealEstateArr([
     ...donotTouchRealEstateArr,
-    new RealEstate(realestateInput, +priceInput, urlInput, newId),
-  ];
+    new RealEstate(
+      realestateInput.value,
+      +priceInput.value,
+      urlInput.value,
+      newId
+    ),
+  ]);
   /*
     add new realestate to donotTouchRealEstateArr array,
     we will create new realestate object using RealEstate class.
@@ -44,3 +57,17 @@ const handleCreateRealEstateSubmit = (event: SubmitEvent) => {
   */
   console.log("donotTouchRealEstateArr", donotTouchRealEstateArr);
 };
+
+window.addEventListener("load", () => {
+  let createRealestateSubmitForm = document.getElementById(
+    "createRealestateSubmitForm"
+  );
+  if (createRealestateSubmitForm) {
+    createRealestateSubmitForm.addEventListener(
+      "submit",
+      (event: SubmitEvent) => {
+        handleCreateRealEstateSubmit(event);
+      }
+    );
+  }
+});
