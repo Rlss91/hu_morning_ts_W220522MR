@@ -31,7 +31,6 @@ const initRealestateArrays = (): void => {
   ) as RealEstate[]; // same as deep copy
 };
 initRealestateArrays();
-console.log("here");
 
 const changeRealEstateArr = (newRealEstateArr: RealEstate[]): void => {
   realEstateArr = newRealEstateArr;

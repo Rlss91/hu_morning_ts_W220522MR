@@ -22,6 +22,7 @@ window.addEventListener("load", () => {
     let realEstatFilterTextBoxInput = document.getElementById("realEstatFilterTextBoxInput");
     let selectDisplaySortAscBtn = document.getElementById("selectDisplaySortAscBtn");
     let selectDisplaySortDescBtn = document.getElementById("selectDisplaySortDescBtn");
+    let modelEditSaveBtn = document.getElementById("modelEditSaveBtn");
     if (selectDisplayModeCaruselaBtn !== null) {
         selectDisplayModeCaruselaBtn.addEventListener("click", () => {
             handleSelectModeClick(EModeDisplay.CARUSELA);
@@ -60,6 +61,11 @@ window.addEventListener("load", () => {
     if (selectDisplaySortAscBtn !== null) {
         selectDisplaySortAscBtn.addEventListener("click", () => {
             handleSortClick(ESortDisplay.ASC);
+        });
+    }
+    if (modelEditSaveBtn) {
+        modelEditSaveBtn.addEventListener("click", () => {
+            handleSaveEditClick();
         });
     }
 });
@@ -136,7 +142,6 @@ const handleSaveEditClick = () => {
         realestateItem.title = realestateInput.value;
         realestateItem.price = +priceInput.value;
         realestateItem.imgUrl = urlInput.value;
-        console.log("donotTouchRealEstateArr", donotTouchRealEstateArr);
         localStorage.setItem("realEstateArr", JSON.stringify(donotTouchRealEstateArr));
         initRealestateArrays();
         initPageLoad();

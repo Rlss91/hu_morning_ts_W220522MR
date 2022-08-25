@@ -46,6 +46,7 @@ window.addEventListener("load", () => {
   let selectDisplaySortDescBtn = document.getElementById(
     "selectDisplaySortDescBtn"
   );
+  let modelEditSaveBtn = document.getElementById("modelEditSaveBtn");
   if (selectDisplayModeCaruselaBtn !== null) {
     selectDisplayModeCaruselaBtn.addEventListener("click", () => {
       handleSelectModeClick(EModeDisplay.CARUSELA);
@@ -100,10 +101,13 @@ window.addEventListener("load", () => {
       handleSortClick(ESortDisplay.ASC);
     });
   }
+  if (modelEditSaveBtn) {
+    modelEditSaveBtn.addEventListener("click", () => {
+      handleSaveEditClick();
+    });
+  }
 });
 
-// console.log(realEstateArr);
-// console.log("here");
 let selectModeDisplayNow = "caruselaContainer";
 const handleSelectModeClick = (selectModeNum: EModeDisplay): void => {
   let selectModeDisplayNowElement =
@@ -225,7 +229,6 @@ const handleSaveEditClick = (): void => {
     realestateItem.title = realestateInput.value;
     realestateItem.price = +priceInput.value;
     realestateItem.imgUrl = urlInput.value;
-    console.log("donotTouchRealEstateArr", donotTouchRealEstateArr);
     localStorage.setItem(
       "realEstateArr",
       JSON.stringify(donotTouchRealEstateArr)

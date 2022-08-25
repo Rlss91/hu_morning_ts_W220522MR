@@ -30,13 +30,25 @@ const initializeList = (): void => {
                 class="btn btn-warning"
                 data-bs-toggle="modal"
                 data-bs-target="#editRealestateModal"
-                onclick="handleModalPopupClick(${realEstateItem.id})"
+                id="editRealestateBtn${realEstateItem.id}"
                 >
                     <i class="bi bi-pencil-square"></i>
                 </button>
             </div>
         </div>
         `;
+    let editRealestateBtn = document.getElementById(
+      `editRealestateBtn${realEstateItem.id}`
+    );
+    if (editRealestateBtn) {
+      console.log("editRealestateBtn", editRealestateBtn);
+      const handleAnuFunc = () => {
+        console.log("editRealestateBtn clicked");
+        handleModalPopupClick(realEstateItem.id);
+      };
+      editRealestateBtn.removeEventListener("click", handleAnuFunc, true);
+      editRealestateBtn.addEventListener("click", handleAnuFunc);
+    }
   }
 };
 initializeList();

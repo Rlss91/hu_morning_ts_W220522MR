@@ -12,7 +12,6 @@ const initRealestateArrays = () => {
     donotTouchRealEstateArr = JSON.parse(JSON.stringify(realEstateArr));
 };
 initRealestateArrays();
-console.log("here");
 const changeRealEstateArr = (newRealEstateArr) => {
     realEstateArr = newRealEstateArr;
 };
