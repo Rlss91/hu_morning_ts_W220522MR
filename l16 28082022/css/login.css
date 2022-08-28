@@ -1,0 +1,166 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --primary-light-hsl: 200, 100%, 91%;
+  --primary-hsl: 200, 100%, 50%;
+  --primary-dark-hsl: 200, 100%, 6%;
+  --success-hsl: 100, 60%, 50%;
+  --error-hsl: 0, 60%, 50%;
+}
+
+body {
+  margin: 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  color: white;
+}
+
+.full-screen-container {
+  background-image: url("https://img3.goodfon.ru/wallpaper/nbig/7/f2/beautiful-blue-view-sky.jpg");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  --color: hsl(var(--primary-dark-hsl), 0.7);
+  background-color: var(--color);
+  box-shadow: 0 0 1.3rem 0 var(--color);
+  padding: 3rem 3rem;
+  width: 70%;
+  max-width: 33.5rem;
+  border-radius: 1.55rem;
+  transition: all 1s;
+}
+
+.login-container-green {
+  background-color: rgba(0, 255, 0, 0.7);
+  box-shadow: 0 0 1.3rem 0 rgba(0, 255, 0, 0.7);
+}
+
+.login-container-red {
+  background-color: rgba(255, 0, 0, 0.7);
+  box-shadow: 0 0 1.3rem 0 rgba(255, 0, 0, 0.7);
+}
+
+.login-title {
+  margin: 0;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  font-stretch: wider;
+  font-weight: normal;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.input-group label {
+  color: white;
+  font-weight: lighter;
+}
+
+.input-group input {
+  font-size: 1.25rem;
+  padding: 0.5em;
+  background-color: hsl(var(--primary-light-hsl), 0.3);
+  border: none;
+  outline: none;
+  border-radius: 0.25em;
+  color: white;
+  font-weight: lighter;
+}
+
+.input-group.success input {
+  box-shadow: 0 0 0 1px hsl(var(--success-hsl));
+}
+
+.input-group.error input {
+  box-shadow: 0 0 0 1px hsl(var(--error-hsl));
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 0 1px hsl(var(--primary-hsl));
+}
+
+.login-button {
+  padding: 0.5em 1em;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  color: white;
+  background-color: hsl(var(--primary-hsl), 0.25);
+  border: 1px solid hsl(var(--primary-hsl));
+  border-radius: 0.25em;
+  outline: none;
+  cursor: pointer;
+}
+
+.login-button:hover,
+.login-button:focus {
+  background-color: hsl(var(--primary-hsl), 0.4);
+}
+
+.footer-login {
+  display: flex;
+  color: wheat;
+  justify-content: center;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0 0 0 #fff;
+  animation: star-blink infinite 3s;
+}
+
+#star1 {
+  top: 5rem;
+  left: 5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+#star2 {
+  top: 10rem;
+  left: 8rem;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+#star3 {
+  top: 20rem;
+  left: 30rem;
+  width: 0.3rem;
+  height: 0.3rem;
+}
+
+@keyframes star-blink {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 #fff;
+  }
+  50% {
+    box-shadow: 0 0 1rem 1rem #fff;
+  }
+}
